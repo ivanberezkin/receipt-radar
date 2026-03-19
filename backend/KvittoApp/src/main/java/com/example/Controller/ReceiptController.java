@@ -15,11 +15,13 @@ public class ReceiptController {
     @Autowired
     private ReceiptRepository receiptRepository;
 
+    //Hämta från Databsen
     @GetMapping
     public List<Receipt> getAllReceipts(){
         return receiptRepository.findAll();
     }
 
+    //Lägga till i databsen
     @PostMapping
     public Receipt createReceipt(@RequestBody Receipt receipt){
         return receiptRepository.save(receipt);

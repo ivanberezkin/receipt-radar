@@ -7,10 +7,12 @@ function App() {
 
   const [receipts, setReceipts] = useState([]);
 
+  //hämtar lista av receupts från   http://localhost:8080/api/receipts GET REQUEST-> Backend
   const fetchReceipts = () => {
     axios.get('http://localhost:8080/api/receipts')
     .then(res => setReceipts(res.data))
     .catch(err => console.log(err))
+
   };
 
   useEffect(() => {

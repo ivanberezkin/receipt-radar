@@ -14,6 +14,7 @@ function ReceiptForm(){
             date: new Date().toISOString().split('T')[0]
         };
 
+        // POST REQUEST -> 
         axios.post('http://localhost:8080/api/receipts', newReceipt)
         .then(response => {
             alert(`Receipt saved with ID: ${response.data.id}`)
