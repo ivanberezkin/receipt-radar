@@ -3,22 +3,22 @@ import axios from "axios";
 
 function ReceiptForm(){
     const [storeName, setStoreName] = useState('');
-    const [amount, setAmount] = useState('');
+    const [amountPaid, setAmountPaid] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const newReceipt = {
             storeName: storeName,
-            amount: parseFloat(amount),
-            date: new Date().toISOString.split('T')[0]
+            amountPaid: parseFloat(amountPaid),
+            date: new Date().toISOString().split('T')[0]
         };
 
-        axios.post('https://localhost:8080/api/receipts', newReceipt)
+        axios.post('http://localhost:8080/api/receipts', newReceipt)
         .then(response => {
             alert(`Receipt saved with ID: ${response.data.id}`)
             setStoreName('');
-            setAmount('');
+            setAmountPaid('');
         })
         .catch(error => {
             console.error("Something went wrong when saving.")
@@ -38,8 +38,8 @@ function ReceiptForm(){
       <input 
         type="number" 
         placeholder="Belopp" 
-        value={amount} 
-        onChange={(e) => setAmount(e.target.value)} 
+        value={amountPaid} 
+        onChange={(e) => setAmountPaid(e.target.value)} 
         required 
       />
       <button type="submit">Spara kvitto</button>
