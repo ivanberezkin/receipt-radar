@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 
-function receiptForm(){
+function ReceiptForm(){
     const [storeName, setStoreName] = useState('');
     const [amount, setAmount] = useState('');
 
@@ -47,4 +47,4 @@ function receiptForm(){
   );
 }
 
-export default receiptForm;
+export default ReceiptForm;
