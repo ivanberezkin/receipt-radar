@@ -2,18 +2,25 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-.kotlin
-src/main/resources/application.properties
-docker-compose.yml
-.env
+backend/KvittoApp/.kotlin
+backend/KvittoApp/src/main/resources/application.properties
+backend/KvittoApp/docker-compose.yml
+backend/KvittoApp/.env
+
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
+backend/KvittoApp/.idea/modules.xml
+backend/KvittoApp/.idea/jarRepositories.xml
+backend/KvittoApp/.idea/compiler.xml
+backend/KvittoApp/.idea/libraries/
+backend/KvittoApp/*.iws
+backend/KvittoApp/*.iml
+backend/KvittoApp/*.ipr
+
+# --- Frontend (Node/React/Vue) ---
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.DS_Store
 
 ### Eclipse ###
 .apt_generated
@@ -36,6 +43,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
 
 ### Mac OS ###
 .DS_Store
