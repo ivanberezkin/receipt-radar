@@ -1,5 +1,6 @@
 import { Receipt } from '../types/receipt';
 import './ReceiptList.css';
+import { formatDate } from '../utils/utils';
 
 interface ReceiptListProps {
   receipts: Receipt[];
@@ -26,7 +27,7 @@ export const ReceiptList = ({ receipts }: ReceiptListProps) => {
               <tr key={r.id}>
                 <td>{r.vendor}</td>
                 <td>{r.category || 'Unknown'}</td>
-                <td className="date-cell">{r.date}</td>
+                <td className="date-cell">{formatDate(r.date)}</td>
                 <td className="amount-cell">{r.amountPaid} kr</td>
               </tr>
             ))}
