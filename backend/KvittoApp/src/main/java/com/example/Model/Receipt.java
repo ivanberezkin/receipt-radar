@@ -17,7 +17,7 @@ public class Receipt {
 
     private String vendor;
     private Long amountPaid;
-    private String Category;
+    private String category;
     private Date date;
 
     private String imageUrl;
