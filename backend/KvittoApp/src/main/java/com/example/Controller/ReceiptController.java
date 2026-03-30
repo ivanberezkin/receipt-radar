@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/receipts")
@@ -27,5 +28,9 @@ public class ReceiptController {
         return receiptRepository.save(receipt);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteReceipt(@PathVariable Long id){
+        receiptRepository.deleteById(id);
+    }
 
 }
