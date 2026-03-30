@@ -1,4 +1,4 @@
-import { useReceiptForm } from "./Hooks/useReceiptForm";
+import { useReceiptForm } from "../hooks/useReceiptForm";
 
 interface ReceiptFormProps {
     onReceiptAdded : () => void;

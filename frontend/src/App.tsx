@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { ReceiptForm } from "./ReceiptForm";
-import { Receipt } from "./receipt";
-import { fetchReceipts } from "./apiService";
+import { ReceiptForm } from "./components/ReceiptForm";
+import { Receipt } from "./types/receipt";
+import { fetchReceipts } from "./api/apiService";
 import "./App.css";
 
 function App() {

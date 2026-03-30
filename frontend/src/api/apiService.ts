@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Receipt } from './receipt'
+import { Receipt } from '../types/receipt'
 
 const API_URL = 'http://localhost:8080/api/receipts'
 

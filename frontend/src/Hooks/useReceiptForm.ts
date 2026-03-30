@@ -1,7 +1,6 @@
 import React ,{  useState} from 'react';
-import { Receipt } from '../receipt'
-import {addNewReceipt} from '../apiService'
-
+import { Receipt } from '../types/receipt'
+import {addNewReceipt} from '../api/apiService'
 export function useReceiptForm(onSuccess : () => void){
 
     const [vendor, setVendor] = useState('');
