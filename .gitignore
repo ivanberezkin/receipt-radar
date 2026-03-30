@@ -7,6 +7,12 @@ backend/KvittoApp/src/main/resources/application.properties
 backend/KvittoApp/docker-compose.yml
 backend/KvittoApp/.env
 
+# Secrets
+.env
+
+# Aider files
+.aider*
+
 ### IntelliJ IDEA ###
 backend/KvittoApp/.idea/modules.xml
 backend/KvittoApp/.idea/jarRepositories.xml
