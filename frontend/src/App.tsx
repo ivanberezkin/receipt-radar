@@ -1,40 +1,19 @@
-import { useState, useEffect } from "react";
-import { ReceiptForm } from "./components/ReceiptForm";
-import { Receipt } from "./types/receipt";
-import { fetchReceipts } from "./api/apiService";
-import "./App.css";
+import { ReceiptForm } from './components/ReceiptForm';
+
+import './App.css';
+import { ReceiptList } from './components/ReceiptList';
+import { useReceipts } from './hooks/useReceipts';
 
 function App() {
-  const [receipts, setReceipts] = useState<Receipt[]>([]);
+  const { receipts, loading, updateReceiptsViewOnPage } = useReceipts();
 
-  //hämtar lista av receupts från   http://localhost:8080/api/receipts GET REQUEST-> Backend
-  const updateReceiptsViewOnPage = async () => {
-    try {
-      const data = await fetchReceipts();
-      setReceipts(data);
-    } catch (error) {
-      console.error("Couldn't get Receipt", error);
-    }
-  };
-
-  useEffect(() => {
-    updateReceiptsViewOnPage();
-  }, []);
+  if (loading) return <p>Loading Receipts...</p>;
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
-      <h1>Kvitto-App</h1>
+    <div>
       <ReceiptForm onReceiptAdded={updateReceiptsViewOnPage} />
 
-      <hr />
-      <h2>Historik</h2>
-      <ul>
-        {receipts.map((r) => (
-          <li key={r.id}>
-            {r.vendor}: {r.amountPaid} kr
-          </li>
-        ))}
-      </ul>
+      <ReceiptList receipts={receipts} />
     </div>
   );
 }
