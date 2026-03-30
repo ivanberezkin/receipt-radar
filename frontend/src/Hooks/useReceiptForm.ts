@@ -12,7 +12,7 @@ export function useReceiptForm(onSuccess : () => void){
         const newReceipt : Receipt = {
             vendor : vendor,
             amountPaid : parseFloat(amountPaid),
-            date: new Date().toISOString().split('T')[0],
+            date: new Date().toISOString(),
             category: "sport"
         };
         
