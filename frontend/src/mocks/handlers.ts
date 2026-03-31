@@ -8,7 +8,7 @@ export const handlers = [
     http.get(API_URL, () => {
         return HttpResponse.json([
             { id: 1, vendor: 'Ica', category: 'Groceries', amountPaid: 1500, date: '2026-03-20' },
-      { id: 2, vendor: 'Stadium', category: 'Sport', amountPaid: 2000, date: '2026-02-20' }
+            { id: 2, vendor: 'Stadium', category: 'Sport', amountPaid: 2000, date: '2026-02-20' }
         ]);
     }),
 
