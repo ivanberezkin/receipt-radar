@@ -1,0 +1,27 @@
+import { renderHook, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi } from 'vitest';
+import { ReceiptForm } from '../components/ReceiptForm';
+
+describe('useReceiptForm Integration Tests', () => {
+  it('should call addNewReceipt and trigger onSuccess', async () => {
+    const onSuccessMock = vi.fn();
+    const user = userEvent.setup();
+
+    render(<ReceiptForm onReceiptAdded={onSuccessMock} />);
+
+    const vendorInput = screen.getByPlaceholderText(/store/i);
+    const amountInput = screen.getByPlaceholderText(/amount/i);
+    const submitButton = screen.getByRole('button', { name: /Submit/i });
+
+    await user.type(vendorInput, 'Willys');
+    await user.type(amountInput, '550');
+    await user.click(submitButton);
+
+    await waitFor(() => {
+      expect(amountInput).toHaveValue(null);
+    });
+
+    expect(onSuccessMock).toHaveBeenCalled();
+  });
+});

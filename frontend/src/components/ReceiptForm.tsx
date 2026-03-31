@@ -1,10 +1,10 @@
-import { useReceiptForm } from "../hooks/useReceiptForm";
+import { useReceiptForm } from '../hooks/useReceiptForm';
 
 interface ReceiptFormProps {
-    onReceiptAdded : () => void;
+  onReceiptAdded: () => void;
 }
 
-export function ReceiptForm({ onReceiptAdded} : ReceiptFormProps) {
+export function ReceiptForm({ onReceiptAdded }: ReceiptFormProps) {
   const { vendor, setVendor, amountPaid, setAmountPaid, handleSubmit } =
     useReceiptForm(onReceiptAdded);
 
@@ -12,27 +12,27 @@ export function ReceiptForm({ onReceiptAdded} : ReceiptFormProps) {
     <form
       onSubmit={handleSubmit}
       style={{
-        marginBottom: "20px",
-        border: "1px solid #ccc",
-        padding: "10px",
+        marginBottom: '20px',
+        border: '1px solid #ccc',
+        padding: '10px',
       }}
     >
       <h3>Lägg till kvitto</h3>
       <input
         type="text"
-        placeholder="Butik"
+        placeholder="Store"
         value={vendor}
         onChange={(e) => setVendor(e.target.value)}
         required
       />
       <input
         type="number"
-        placeholder="Belopp"
+        placeholder="Amount"
         value={amountPaid}
         onChange={(e) => setAmountPaid(e.target.value)}
         required
       />
-      <button type="submit">Spara kvitto</button>
+      <button type="submit">Submit</button>
     </form>
   );
 }

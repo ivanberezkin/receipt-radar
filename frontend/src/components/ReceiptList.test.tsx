@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 import { ReceiptList } from './ReceiptList';
@@ -37,7 +37,9 @@ describe('ReceiptList Component', () => {
     const deleteButtons = screen.getAllByRole('button', { name: /remove/i });
 
     await user.click(deleteButtons[1]);
-    expect(mockOnRemove).toHaveBeenCalledWith(2);
+    await waitFor(() => {
+      expect(mockOnRemove).toHaveBeenCalledWith(2);
+    });
   });
 
   it('Should show message if receipts are empty', () => {

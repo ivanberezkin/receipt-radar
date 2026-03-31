@@ -17,11 +17,9 @@ export function useReceiptForm(onSuccess : () => void){
         };
         
         const addedReceipt = await addNewReceipt(newReceipt);
-        alert(`Created receipt with id:  ${addedReceipt.id}`);
-        onSuccess();
         setVendor('');
         setAmountPaid('');
-    
+        onSuccess();
     }; 
 
     return {

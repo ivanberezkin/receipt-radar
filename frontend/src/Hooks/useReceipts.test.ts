@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { renderHook, waitFor, act } from '@testing-library/react';
 import {describe, it , expect } from 'vitest';
 import { useReceipts } from './useReceipts';
 
@@ -20,9 +20,12 @@ describe('useReceipts Integration Tests', () => {
         expect(result.current.loading).toBe(true);
         
         await waitFor(() => expect(result.current.loading).toBe(false), {timeout : 3000});
+        
         expect(result.current.receipts).toHaveLength(2);
-
-        await result.current.removeReceiptById(2);
+        
+        await act(async () => {
+         result.current.removeReceiptById(2);
+        });    
 
         await waitFor(() => {
                 expect(result.current.receipts).toHaveLength(1);
