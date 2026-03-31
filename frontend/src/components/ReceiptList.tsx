@@ -4,9 +4,10 @@ import { formatDate } from '../utils/utils';
 
 interface ReceiptListProps {
   receipts: Receipt[];
+  onRemove: (id: number) => void;
 }
 
-export const ReceiptList = ({ receipts }: ReceiptListProps) => {
+export const ReceiptList = ({ receipts, onRemove }: ReceiptListProps) => {
   return (
     <div className="receipt-history">
       <h2>Historik</h2>
@@ -29,6 +30,14 @@ export const ReceiptList = ({ receipts }: ReceiptListProps) => {
                 <td>{r.category || 'Unknown'}</td>
                 <td className="date-cell">{formatDate(r.date)}</td>
                 <td className="amount-cell">{r.amountPaid} kr</td>
+                <td>
+                  <button
+                    className="remove-receipt-btn"
+                    onClick={() => onRemove(r.id!)}
+                  >
+                    Remove
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

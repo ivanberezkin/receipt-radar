@@ -29,8 +29,10 @@ public class ReceiptController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteReceipt(@PathVariable Long id){
-        receiptRepository.deleteById(id);
+    public void deleteReceipt(@PathVariable("id") Long id){
+        if(receiptRepository.existsById(id)){
+            receiptRepository.deleteById(id);
+        }
     }
 
 }

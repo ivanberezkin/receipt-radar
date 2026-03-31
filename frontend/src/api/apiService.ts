@@ -16,9 +16,10 @@ export const fetchReceipts = async () => {
 };
 
 //DELETE Receipt
-export const removeReceipt = async (receiptID : number) => {
+export const removeReceiptFromApi = async (receiptID : number) => {
     try{
-        const response = await axios.delete(`API_URL/${receiptID}`)
+        console.log(`${API_URL}/${receiptID}`);
+        const response = await axios.delete(`${API_URL}/${receiptID}`)
         return response.data;
     }catch(error){
         axios.isAxiosError(error);
