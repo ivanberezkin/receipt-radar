@@ -16,7 +16,7 @@ export function useReceiptForm(onSuccess : () => void){
             category: "sport"
         };
         
-        const addedReceipt = await addNewReceipt(newReceipt);
+        await addNewReceipt(newReceipt);
         setVendor('');
         setAmountPaid('');
         onSuccess();

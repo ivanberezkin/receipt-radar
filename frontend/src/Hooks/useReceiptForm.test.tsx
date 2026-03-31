@@ -1,7 +1,12 @@
-import { renderHook, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 import { ReceiptForm } from '../components/ReceiptForm';
+import { addNewReceipt } from '../api/apiService';
+
+vi.mock('../api/apiService', () => ({
+  addNewReceipt: vi.fn().mockResolvedValue({ id: 123 }),
+}));
 
 describe('useReceiptForm Integration Tests', () => {
   it('should call addNewReceipt and trigger onSuccess', async () => {
@@ -21,7 +26,13 @@ describe('useReceiptForm Integration Tests', () => {
     await waitFor(() => {
       expect(amountInput).toHaveValue(null);
     });
-
+    expect(vendorInput).toHaveValue('');
+    expect(addNewReceipt).toHaveBeenCalledWith(
+      expect.objectContaining({
+        vendor: 'Willys',
+        amountPaid: 550,
+      })
+    );
     expect(onSuccessMock).toHaveBeenCalled();
   });
 });
