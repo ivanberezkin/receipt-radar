@@ -39,4 +39,14 @@ describe('ReceiptList Component', () => {
     await user.click(deleteButtons[1]);
     expect(mockOnRemove).toHaveBeenCalledWith(2);
   });
+
+  it('Should show message if receipts are empty', () => {
+    render(<ReceiptList receipts={[]} onRemove={mockOnRemove} />);
+    expect(
+      screen.queryByRole('button', { name: /remove/i })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(/Inga sparade kvitton hittades./i)
+    ).toBeInTheDocument();
+  });
 });
