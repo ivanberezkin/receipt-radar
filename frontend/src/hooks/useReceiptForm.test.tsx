@@ -33,7 +33,10 @@ describe('useReceiptForm Integration Tests', () => {
         amountPaid: 550,
       })
     );
-    // Assert that onSuccessMock was called
-    expect(onSuccessMock).toHaveBeenCalledTimes(1);
+
+    // Wait for onSuccessMock to be called after addNewReceipt resolves
+    await waitFor(() => {
+      expect(onSuccessMock).toHaveBeenCalledTimes(1);
+    });
   });
 });
