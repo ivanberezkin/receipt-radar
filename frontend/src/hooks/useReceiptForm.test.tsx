@@ -23,10 +23,8 @@ describe('useReceiptForm Integration Tests', () => {
     await user.type(amountInput, '550');
     await user.click(submitButton);
 
-    await waitFor(() => {
-      expect(amountInput).toHaveValue(null);
-    });
     expect(vendorInput).toHaveValue('');
+    expect(amountInput).toHaveValue('');
     expect(addNewReceipt).toHaveBeenCalledWith(
       expect.objectContaining({
         vendor: 'Willys',
@@ -34,7 +32,7 @@ describe('useReceiptForm Integration Tests', () => {
       })
     );
 
-    // Wait for onSuccessMock to be called after addNewReceipt resolves
+    // Wait for onSuccessMock to be called after addNewReceipt resolves and state is reset
     await waitFor(() => {
       expect(onSuccessMock).toHaveBeenCalledTimes(1);
     });
