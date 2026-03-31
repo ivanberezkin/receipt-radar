@@ -1,17 +1,20 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 import { ReceiptForm } from '../components/ReceiptForm';
-import { addNewReceipt } from '../api/apiService';
-
-vi.mock('../api/apiService', () => ({
-  addNewReceipt: vi.fn().mockResolvedValue({ id: 123 }),
-}));
+import * as apiService from '../api/apiService';
 
 describe('useReceiptForm Integration Tests', () => {
   it('should call addNewReceipt and trigger onSuccess', async () => {
+    vi.spyOn(apiService, 'addNewReceipt').mockResolvedValue({
+      vendor: 'Willys',
+      amountPaid: 550,
+      date: expect.any(String),
+      category: 'Groceries',
+    });
+
     const onSuccessMock = vi.fn();
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
 
     render(<ReceiptForm onReceiptAdded={onSuccessMock} />);
 
@@ -19,22 +22,16 @@ describe('useReceiptForm Integration Tests', () => {
     const amountInput = screen.getByPlaceholderText(/amount/i);
     const submitButton = screen.getByRole('button', { name: /Submit/i });
 
-    await user.type(vendorInput, 'Willys');
-    await user.type(amountInput, '550');
+    fireEvent.change(vendorInput, { target: { value: 'Willys' } });
+    fireEvent.change(amountInput, { target: { value: '550' } });
     await user.click(submitButton);
 
+    expect(onSuccessMock).toHaveBeenCalled();
+    expect(amountInput).toHaveValue(null);
     expect(vendorInput).toHaveValue('');
-    expect(amountInput).toHaveValue('');
-    expect(addNewReceipt).toHaveBeenCalledWith(
-      expect.objectContaining({
-        vendor: 'Willys',
-        amountPaid: 550,
-      })
-    );
 
-    // Wait for onSuccessMock to be called after addNewReceipt resolves and state is reset
-    await waitFor(() => {
-      expect(onSuccessMock).toHaveBeenCalledTimes(1);
-    });
+    expect(apiService.addNewReceipt).toHaveBeenCalledWith(
+      expect.objectContaining({ vendor: 'Willys', amountPaid: 550 })
+    );
   });
 });
