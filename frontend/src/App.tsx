@@ -2,7 +2,7 @@ import { ReceiptForm } from './components/ReceiptForm';
 
 import './App.css';
 import { ReceiptList } from './components/ReceiptList';
-import { useReceipts } from './hooks_temp/useReceipts';
+import { useReceipts } from './hooks/useReceipts';
 
 function App() {
   const { receipts, loading, updateReceiptsViewOnPage, removeReceiptById } =
