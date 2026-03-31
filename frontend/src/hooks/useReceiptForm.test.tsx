@@ -33,6 +33,7 @@ describe('useReceiptForm Integration Tests', () => {
         amountPaid: 550,
       })
     );
+    // Assert that onSuccessMock was called
     expect(onSuccessMock).toHaveBeenCalledTimes(1);
   });
 });
