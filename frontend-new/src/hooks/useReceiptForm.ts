@@ -21,13 +21,18 @@ export function useReceiptForm(onSuccess: () => void) {
       category: category,
       notes: notes,
     };
-
-    await addNewReceipt(newReceipt);
-    setVendor("");
-    setCategory("");
-    setNotes("");
-    setAmountPaid("");
-    onSuccess();
+    try {
+      await addNewReceipt(newReceipt);
+      setVendor("");
+      setCategory("");
+      setNotes("");
+      setAmountPaid("");
+      onSuccess();
+    } catch (error) {
+      console.error("useReceiptForm: Couldn't send to API", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return {

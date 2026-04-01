@@ -1,6 +1,6 @@
 // src/components/ReceiptCard.tsx
-import type { Receipt } from "../types/receipt.ts";
-import { formatDate } from "../utils/utils.ts";
+import type { Receipt } from "../../types/receipt.ts";
+import { formatDate } from "../../utils/utils.ts";
 
 export const ReceiptCard = ({ receipt }: { receipt: Receipt }) => {
   return (

@@ -24,6 +24,7 @@ describe("apiService Tests", () => {
           amountPaid: 500,
           date: "2023-02-02",
           category: "test",
+          notes: "hej",
         }),
       ).rejects.toThrow();
     });
@@ -34,6 +35,7 @@ describe("apiService Tests", () => {
         amountPaid: 500,
         date: "2023-02-02",
         category: "test",
+        notes: "hej",
       };
 
       server.use(

@@ -1,4 +1,4 @@
-import logo from "../assets/receipt-radar-logo-img.png";
+import logo from "../../assets/receipt-radar-logo-img.png";
 
 export const Header = () => {
   return (

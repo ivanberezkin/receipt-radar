@@ -1,4 +1,4 @@
-import { useNavigation } from "../hooks/useNavigation";
+import { useNavigation } from "../../hooks/useNavigation";
 
 const navItems = [
   { name: "Home", icon: "🏠", active: true },

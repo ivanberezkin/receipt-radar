@@ -1,4 +1,4 @@
-import type { Receipt } from "../types/receipt.ts";
+import type { Receipt } from "../../types/receipt.ts";
 import "./ReceiptList.css";
 //import { formatDate } from "../utils/utils";
 import { ReceiptCard } from "./ReceiptCard.tsx";
