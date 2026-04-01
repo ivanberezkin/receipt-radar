@@ -4,5 +4,6 @@ export interface Receipt {
   amountPaid: number;
   date: string;
   category: string;
+  notes: string;
   imageUrl?: string;
 }
