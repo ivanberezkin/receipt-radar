@@ -1,7 +1,8 @@
 // src/components/layout/Navbar.tsx
 const navItems = [
-  { name: "Home", icon: "🏠" },
-  { name: "Timeline", icon: "📋", active: true },
+  { name: "Home", icon: "🏠", active: true },
+  { name: "Timeline", icon: "📋" },
+  { name: "Scan", icon: "📸" },
   { name: "Reports", icon: "📊" },
   { name: "Settings", icon: "⚙️" },
 ];

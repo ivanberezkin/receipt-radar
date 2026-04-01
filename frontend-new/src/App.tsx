@@ -1,13 +1,10 @@
-import { ReceiptForm } from "./components/ReceiptForm";
-
 import "./App.css";
 import { ReceiptList } from "./components/ReceiptList";
 import { useReceipts } from "./hooks/useReceipts";
 import { AppLayout } from "./components/AppLayout";
 
 function App() {
-  const { receipts, loading, updateReceiptsViewOnPage, removeReceiptById } =
-    useReceipts();
+  const { receipts, loading, removeReceiptById } = useReceipts();
 
   if (loading) return <p>Loading Receipts...</p>;
 
