@@ -9,7 +9,7 @@ const navItems = [
 ];
 
 export const Navbar = () => {
-  const { activeTab, navigateTo } = useNavigation("Home");
+  const { activeTab, navigateTo } = useNavigation();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 h-18 bg-[#161B21] border-t border-gray-800 flex items-center justify-around px-2 z-50 pb-safe">

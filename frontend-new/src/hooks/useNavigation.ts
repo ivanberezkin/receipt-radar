@@ -1,10 +1,30 @@
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-export const useNavigation = (initialTab = "Home") => {
-  const [activeTab, setActiveTab] = useState(initialTab);
+export const useNavigation = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const getActiveTab = () => {
+    switch (location.pathname) {
+      case "/":
+        return "Home";
+      case "/timeline":
+        return "Timeline";
+      case "/scan":
+        return "Scan";
+      case "/reports":
+        return "Reports";
+      case "/settings":
+        return "Settings";
+      default:
+        return "Home";
+    }
+  };
+
+  const activeTab = getActiveTab();
   const navigateTo = (tabName: string) => {
-    setActiveTab(tabName);
+    const path = tabName === "Home" ? "/" : `/${tabName.toLowerCase()}`;
+    navigate(path);
   };
 
   return { activeTab, navigateTo };

@@ -1,34 +1,47 @@
 import "./App.css";
 import { ReceiptList } from "./components/ReceiptList";
+import { ReceiptForm } from "./components/ReceiptForm";
 import { useReceipts } from "./hooks/useReceipts";
 import { AppLayout } from "./components/AppLayout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const { receipts, loading, removeReceiptById } = useReceipts();
+  const { receipts, loading, updateReceiptsViewOnPage, removeReceiptById } =
+    useReceipts();
 
   if (loading) return <p>Loading Receipts...</p>;
 
   return (
-    <AppLayout>
-      <div className="mt-6 mb-4 px-2">
-        {/* searchbar (stoppa in din sök-komponent här) */}
-        <input
-          type="search"
-          placeholder="Search..."
-          className="w-full p-3 rounded-xl bg-[#1E252B] border border-gray-800 text-gray-300 placeholder:text-gray-600 mb-5"
-        />
+    <BrowserRouter>
+      <AppLayout>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ReceiptList receipts={receipts} onRemove={removeReceiptById} />
+            }
+          />
 
-        {/* Week/Month/Year tabbar (stoppa in din tab-komponent här) */}
-        <div className="flex gap-1 bg-[#1E252B] rounded-full p-1 border border-gray-800 mb-6">
-          <button className="flex-1 px-4 py-2 bg-[#2D353C] text-white rounded-full">
-            Week
-          </button>
-          <button className="flex-1 px-4 py-2 text-gray-500">Month</button>
-          <button className="flex-1 px-4 py-2 text-gray-500">Year</button>
-        </div>
-      </div>
-      <ReceiptList receipts={receipts} onRemove={removeReceiptById} />
-    </AppLayout>
+          <Route
+            path="/scan"
+            element={<ReceiptForm onReceiptAdded={updateReceiptsViewOnPage} />}
+          />
+
+          {/* Övriga sidor (placeholder tills du byggt dem) */}
+          <Route
+            path="/timeline"
+            element={
+              <ReceiptList receipts={receipts} onRemove={removeReceiptById} />
+            }
+          />
+          <Route path="/reports" element={<div>Rapporter kommer här</div>} />
+          <Route
+            path="/settings"
+            element={<div>Inställningar kommer här</div>}
+          />
+        </Routes>
+      </AppLayout>
+    </BrowserRouter>
   );
 }
 
