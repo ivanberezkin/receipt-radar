@@ -58,6 +58,13 @@ describe('apiService Tests', () => {
       );
       await expect(fetchReceipts()).rejects.toThrow();
     });
+
+    it('Succesfully fetch receipts from mock', async () => {
+      const data = await fetchReceipts();
+      expect(data).toHaveLength(2);
+      expect(data[0].id).toBe(1);
+      expect(data[1].vendor).toMatch(/stadium/i);
+    });
   });
 
   describe('removeReceiptFromApi test', () => {
