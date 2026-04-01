@@ -1,48 +1,25 @@
 import type { Receipt } from "../types/receipt.ts";
 import "./ReceiptList.css";
-import { formatDate } from "../utils/utils";
+//import { formatDate } from "../utils/utils";
+import { ReceiptCard } from "./ReceiptCard.tsx";
 
 interface ReceiptListProps {
   receipts: Receipt[];
   onRemove: (id: number) => void;
 }
 
-export const ReceiptList = ({ receipts, onRemove }: ReceiptListProps) => {
+export const ReceiptList = ({ receipts }: ReceiptListProps) => {
   return (
-    <div className="receipt-history">
-      <h2>Historik</h2>
-      {receipts.length === 0 ? (
-        <p>Inga sparade kvitton hittades.</p>
-      ) : (
-        <table className="receipt-table">
-          <thead>
-            <tr>
-              <th>Store</th>
-              <th>Category</th>
-              <th>Date</th>
-              <th>Amount Paid</th>
-            </tr>
-          </thead>
-          <tbody>
-            {receipts.map((r) => (
-              <tr key={r.id}>
-                <td>{r.vendor}</td>
-                <td>{r.category || "Unknown"}</td>
-                <td className="date-cell">{formatDate(r.date)}</td>
-                <td className="amount-cell">{r.amountPaid} kr</td>
-                <td>
-                  <button
-                    className="remove-receipt-btn"
-                    onClick={() => onRemove(r.id!)}
-                  >
-                    Remove
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+    <section className="w-full max-w-md mx-auto px-4 sm:px-0">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-gray-300 font-medium">Ordered by date</h2>
+      </div>
+
+      <div className="flex flex-col">
+        {receipts.map((receipt) => (
+          <ReceiptCard key={receipt.id} receipt={receipt} />
+        ))}
+      </div>
+    </section>
   );
 };
