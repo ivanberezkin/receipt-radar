@@ -19,6 +19,7 @@ public class Receipt {
     private Long amountPaid;
     private String category;
     private Date date;
+    private String notes;
 
     private String imageUrl;
 
