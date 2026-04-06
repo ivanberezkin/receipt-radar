@@ -37,6 +37,10 @@ class ReceiptServiceImplTest {
         assertEquals(testReceipt.getVendor(), result.getFirst().getVendor());
     }
 
+    @Test
+    void createNewReceiptTest(){
+
+    }
 
 
 }
