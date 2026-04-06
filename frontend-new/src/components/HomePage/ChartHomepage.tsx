@@ -32,7 +32,10 @@ export const ChartHomepage = () => {
           </h2>
         </div>
         <div className="flex bg-surface-container-highest p-1 rounded-lg border border-outline-variant/20">
-          <button className="px-3 py-1 text-xs font-bold text-primary bg-surface-bright rounded shadow-sm">
+          <button className="px-3 py-1 text-xs font-bold text-primary bg-surface-bright rounded shadow-sm hover:text-on-surface transition-colors">
+            Week
+          </button>
+          <button className="px-3 py-1 text-xs font-bold text-on-surface-variant hover:text-on-surface transition-colors">
             Month
           </button>
           <button className="px-3 py-1 text-xs font-bold text-on-surface-variant hover:text-on-surface transition-colors">
@@ -77,6 +80,7 @@ export const ChartHomepage = () => {
                 borderRadius: "8px",
               }}
               itemStyle={{ color: "#a0ffc3", fontWeight: "bold" }}
+              labelStyle={{ color: "#f1f3fc", fontWeight: "bold" }}
             />
             <Area
               type="monotone"
