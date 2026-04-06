@@ -1,12 +1,14 @@
 package com.example.Controller;
 
-import com.example.Model.Receipt;
-import com.example.Repositories.ReceiptRepository;
+import com.example.DTO.ReceiptRequestDto;
+import com.example.DTO.ReceiptResponseDto;
+import com.example.Service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/receipts")
@@ -14,25 +16,26 @@ import java.util.Optional;
 public class ReceiptController {
 
     @Autowired
-    private ReceiptRepository receiptRepository;
+    private ReceiptService receiptService;
 
     //Hämta från Databsen
     @GetMapping
-    public List<Receipt> getAllReceipts(){
-        return receiptRepository.findAll();
+    public ResponseEntity<List<ReceiptResponseDto>> getAllReceipts(){
+        List<ReceiptResponseDto> receipts = receiptService.getAllReceipts();
+        return ResponseEntity.ok(receipts);
     }
 
     //Lägga till i databsen
     @PostMapping
-    public Receipt createReceipt(@RequestBody Receipt receipt){
-        return receiptRepository.save(receipt);
+    public ResponseEntity<ReceiptResponseDto> createReceipt(@RequestBody ReceiptRequestDto newReceipt){
+        ReceiptResponseDto createdReceipt = receiptService.createReceipt(newReceipt);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdReceipt);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteReceipt(@PathVariable("id") Long id){
-        if(receiptRepository.existsById(id)){
-            receiptRepository.deleteById(id);
-        }
+    public ResponseEntity<Void> deleteReceipt(@PathVariable("id") Long id){
+        receiptService.deleteReceiptById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
