@@ -2,8 +2,6 @@ package com.example.Controller;
 
 import com.example.DTO.ReceiptRequestDto;
 import com.example.DTO.ReceiptResponseDto;
-import com.example.Model.ReceiptEntity;
-import com.example.Repositories.ReceiptRepository;
 import com.example.Service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,6 +2,7 @@ package com.example.DTO;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 //Backend sends this to frontend (Response)
@@ -11,7 +12,7 @@ public class ReceiptResponseDto {
     private String vendor;
     private Long amountPaid;
     private String category;
-    private Date date;
+    private LocalDate date;
     private String notes;
     private String imageUrl;
 

@@ -7,10 +7,12 @@ import com.example.Repositories.ReceiptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ReceiptServiceImpl implements ReceiptService{
@@ -42,15 +44,17 @@ public class ReceiptServiceImpl implements ReceiptService{
 
     @Override
     public void deleteReceiptById(Long id) {
+        if(!receiptRepository.existsById(id)){
+            throw new NoSuchElementException("ReceiptServiceImpl: Receipt not found with id: " + id );
+        }
         receiptRepository.deleteById(id);
     }
 
-    private Date formatStringToDate(String dateToFormat){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private LocalDate formatStringToDate(String dateToFormat){
         try {
-            return formatter.parse(dateToFormat);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+            return LocalDate.parse(dateToFormat, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("ReceiptServiceImpl: Invalid date format. Expected: yyyy-MM-dd " + dateToFormat, e);
         }
     }
 
