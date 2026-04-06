@@ -18,7 +18,6 @@ public class ReceiptController {
     @Autowired
     private ReceiptService receiptService;
 
-    //Hämta från Databsen
     @GetMapping
     public ResponseEntity<List<ReceiptResponseDto>> getAllReceipts() {
         List<ReceiptResponseDto> receipts = receiptService.getAllReceipts();

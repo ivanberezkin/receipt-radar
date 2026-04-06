@@ -1,8 +1,10 @@
 package com.example.Service;
 
+import com.example.DTO.ReceiptRequestDto;
 import com.example.DTO.ReceiptResponseDto;
 import com.example.Model.ReceiptEntity;
 import com.example.Repositories.ReceiptRepository;
+import com.example.TestUtils.TestUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,10 +28,7 @@ class ReceiptServiceImplTest {
 
     @Test
     void getAllReceipts_ShouldReturnListOfDtos(){
-        ReceiptEntity testReceipt = new ReceiptEntity();
-        testReceipt.setId(1L);
-        testReceipt.setVendor("Ica");
-        testReceipt.setAmountPaid(500L);
+        ReceiptEntity testReceipt = TestUtils.createTestReceipt();
 
         when(receiptRepository.findAll()).thenReturn(List.of(testReceipt));
 
@@ -38,8 +38,15 @@ class ReceiptServiceImplTest {
     }
 
     @Test
-    void createNewReceiptTest(){
+    void createReceipt_ShouldReturnResponseDto(){
+        ReceiptRequestDto request = TestUtils.createTestRequestDto();
+        ReceiptEntity testReceipt = TestUtils.createTestReceipt();
 
+        when(receiptRepository.save(any(ReceiptEntity.class))).thenReturn(testReceipt);
+
+        ReceiptResponseDto result = receiptService.createReceipt(request);
+
+        assertEquals(testReceipt.getVendor(), result.getVendor());
     }
 
 
