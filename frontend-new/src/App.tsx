@@ -4,8 +4,7 @@ import { ReceiptForm } from "./components/ReceiptForm";
 import { useReceipts } from "./hooks/useReceipts";
 import { AppLayout } from "./components/AppLayout/AppLayout";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { Timetabs } from "./components/HomePage/Timetabs";
-import { SearchBar } from "./components/HomePage/SearchBar";
+import { Homepage } from "./components/HomePage/Homepage";
 
 function AppContent() {
   const navigate = useNavigate();
@@ -27,11 +26,7 @@ function AppContent() {
         <Route
           path="/"
           element={
-            <>
-              <Timetabs />
-              <SearchBar />
-              <ReceiptList receipts={receipts} onRemove={removeReceiptById} />
-            </>
+            <Homepage receipts={receipts} onRemove={removeReceiptById} />
           }
         />
 
