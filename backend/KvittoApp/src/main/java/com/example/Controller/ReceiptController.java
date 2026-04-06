@@ -1,12 +1,11 @@
 package com.example.Controller;
 
-import com.example.Model.Receipt;
+import com.example.Model.ReceiptEntity;
 import com.example.Repositories.ReceiptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/receipts")
@@ -18,14 +17,14 @@ public class ReceiptController {
 
     //Hämta från Databsen
     @GetMapping
-    public List<Receipt> getAllReceipts(){
+    public List<ReceiptEntity> getAllReceipts(){
         return receiptRepository.findAll();
     }
 
     //Lägga till i databsen
     @PostMapping
-    public Receipt createReceipt(@RequestBody Receipt receipt){
-        return receiptRepository.save(receipt);
+    public ReceiptEntity createReceipt(@RequestBody ReceiptEntity receiptEntity){
+        return receiptRepository.save(receiptEntity);
     }
 
     @DeleteMapping("/{id}")

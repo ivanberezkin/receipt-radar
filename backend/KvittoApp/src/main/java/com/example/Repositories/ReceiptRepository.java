@@ -1,8 +1,8 @@
 package com.example.Repositories;
 
 
-import com.example.Model.Receipt;
+import com.example.Model.ReceiptEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReceiptRepository extends JpaRepository<Receipt, Long> {
+public interface ReceiptRepository extends JpaRepository<ReceiptEntity, Long> {
 }
