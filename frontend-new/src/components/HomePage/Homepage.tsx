@@ -11,11 +11,11 @@ interface HomePageProps {
 
 export const Homepage = ({ receipts, onRemove }: HomePageProps) => {
   return (
-    <>
+    <div>
       <Timetabs />
       <SearchBar />
       <ChartHomepage />
       <ReceiptList receipts={receipts} onRemove={onRemove} />
-    </>
+    </div>
   );
 };
