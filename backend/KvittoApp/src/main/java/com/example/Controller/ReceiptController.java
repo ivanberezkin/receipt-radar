@@ -1,5 +1,6 @@
 package com.example.Controller;
 
+import com.example.DTO.ChartDataDto;
 import com.example.DTO.ReceiptRequestDto;
 import com.example.DTO.ReceiptResponseDto;
 import com.example.Service.ReceiptService;
@@ -30,6 +31,14 @@ public class ReceiptController {
             @RequestParam("endDate") String endDate) {
         List<ReceiptResponseDto> receipts = receiptService.getAllReceiptsForACustomPeriod(startDate, endDate);
         return ResponseEntity.ok(receipts);
+    }
+
+    @GetMapping("/chart")
+    public ResponseEntity<List<ChartDataDto>> findDailyTotalsForPeriod(
+            @RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate){
+        List<ChartDataDto> results = receiptService.findDailyTotalsForPeriod(startDate, endDate);
+        return ResponseEntity.ok(results);
     }
 
     //Lägga till i databsen
