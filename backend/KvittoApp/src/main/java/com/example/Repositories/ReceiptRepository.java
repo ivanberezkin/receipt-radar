@@ -14,7 +14,7 @@ public interface ReceiptRepository extends JpaRepository<ReceiptEntity, Long> {
 
     List<ReceiptEntity> findByDateBetween(LocalDate start, LocalDate end);
 
-    @Query("SELECT new com.example.DTO.ChartDataDto(r.date, SUM(r.amountPaid)) FROM ReceiptEntity r where r.date BETWEEN :start AND :end group by r.date order by r.date ASC")
+    @Query("SELECT new com.example.DTO.ChartDataDto(r.date, COALESCE(SUM(r.amountPaid), 0)) FROM ReceiptEntity r where r.date BETWEEN :start AND :end group by r.date order by r.date ASC")
     List<ChartDataDto> findDailyTotalsForPeriod(
             @Param("start") LocalDate start,
             @Param("end") LocalDate end);

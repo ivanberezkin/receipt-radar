@@ -53,8 +53,12 @@ public class ReceiptServiceImpl implements ReceiptService{
 
     @Override
     public List<ChartDataDto> findDailyTotalsForPeriod(String startDate, String endDate) {
-        List<ChartDataDto> results = receiptRepository.findDailyTotalsForPeriod(formatStringToDate(startDate),formatStringToDate(endDate));
-        return results;
+        LocalDate start = formatStringToDate(startDate);
+        LocalDate end = formatStringToDate(endDate);
+        if(start.isAfter(end)){
+            throw new IllegalArgumentException("ReceiptServiceImpl: StartDate must be on or before EndDate");
+        }
+        return receiptRepository.findDailyTotalsForPeriod(start,end);
     }
 
     private LocalDate formatStringToDate(String dateToFormat){
