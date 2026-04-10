@@ -1,5 +1,6 @@
 package com.example.Service;
 
+import com.example.DTO.ChartDataDto;
 import com.example.DTO.ReceiptRequestDto;
 import com.example.DTO.ReceiptResponseDto;
 import com.example.Model.ReceiptEntity;
@@ -48,6 +49,12 @@ public class ReceiptServiceImpl implements ReceiptService{
             throw new NoSuchElementException("ReceiptServiceImpl: Receipt not found with id: " + id );
         }
         receiptRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ChartDataDto> findDailyTotalsForPeriod(String startDate, String endDate) {
+        List<ChartDataDto> results = receiptRepository.findDailyTotalsForPeriod(formatStringToDate(startDate),formatStringToDate(endDate));
+        return results;
     }
 
     private LocalDate formatStringToDate(String dateToFormat){
