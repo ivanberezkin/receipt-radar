@@ -66,6 +66,4 @@ class ReceiptServiceImplTest {
         assertEquals(1, result.size());
         assertEquals(testReceipt.getVendor(), result.getFirst().getVendor());
     }
-
-
 }

@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 public class ReceiptRepositoryTest {
@@ -34,7 +35,9 @@ public class ReceiptRepositoryTest {
 
         List<ReceiptEntity> results = receiptRepository.findByDateBetween(startDate,endDate);
         assertEquals(2, results.size());
-        assertEquals("Stadium", results.getFirst().getVendor());
+        List<String> vendors = results.stream().map(ReceiptEntity::getVendor).toList();
+        assertTrue(vendors.contains("Stadium"));
+        assertTrue(vendors.contains("Willys"));
     }
 
 }
