@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,13 +42,20 @@ class ReceiptServiceImplTest {
     void createReceipt_ShouldReturnResponseDto(){
         ReceiptRequestDto request = TestUtils.createTestRequestDto();
         ReceiptEntity testReceipt = TestUtils.createTestReceipt();
-
         when(receiptRepository.save(any(ReceiptEntity.class))).thenReturn(testReceipt);
-
         ReceiptResponseDto result = receiptService.createReceipt(request);
-
         assertEquals(testReceipt.getVendor(), result.getVendor());
     }
 
+    @Test
+    void testDeleteReceiptById(){
+        receiptService.deleteReceiptById(1L);
+        verify(receiptRepository).deleteById(1L);
+    }
+
+    @Test
+    void testGetAllReceiptsForACustomPeriod(){
+
+    }
 
 }
