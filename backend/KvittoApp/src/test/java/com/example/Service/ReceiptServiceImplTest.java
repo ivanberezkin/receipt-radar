@@ -53,9 +53,6 @@ class ReceiptServiceImplTest {
         verify(receiptRepository).deleteById(1L);
     }
 
-    @Test
-    void testGetAllReceiptsForACustomPeriod(){
 
-    }
 
 }
