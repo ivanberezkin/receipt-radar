@@ -18,22 +18,29 @@ public class ReceiptController {
     @Autowired
     private ReceiptService receiptService;
 
-    //Hämta från Databsen
     @GetMapping
-    public ResponseEntity<List<ReceiptResponseDto>> getAllReceipts(){
+    public ResponseEntity<List<ReceiptResponseDto>> getAllReceipts() {
         List<ReceiptResponseDto> receipts = receiptService.getAllReceipts();
+        return ResponseEntity.ok(receipts);
+    }
+
+    @GetMapping("/period")
+    public ResponseEntity<List<ReceiptResponseDto>> getReceiptsBetweenDate(
+            @RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate) {
+        List<ReceiptResponseDto> receipts = receiptService.getAllReceiptsForACustomPeriod(startDate, endDate);
         return ResponseEntity.ok(receipts);
     }
 
     //Lägga till i databsen
     @PostMapping
-    public ResponseEntity<ReceiptResponseDto> createReceipt(@RequestBody ReceiptRequestDto newReceipt){
+    public ResponseEntity<ReceiptResponseDto> createReceipt(@RequestBody ReceiptRequestDto newReceipt) {
         ReceiptResponseDto createdReceipt = receiptService.createReceipt(newReceipt);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdReceipt);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReceipt(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteReceipt(@PathVariable("id") Long id) {
         receiptService.deleteReceiptById(id);
         return ResponseEntity.noContent().build();
     }

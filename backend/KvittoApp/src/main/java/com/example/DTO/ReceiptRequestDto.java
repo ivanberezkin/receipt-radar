@@ -1,12 +1,14 @@
 package com.example.DTO;
 
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 //Frontend sends this to API (Request)
 @Data
+@Builder
 public class ReceiptRequestDto {
     private String vendor;
     private Long amountPaid;
