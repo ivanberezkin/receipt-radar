@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,10 +51,21 @@ class ReceiptServiceImplTest {
 
     @Test
     void testDeleteReceiptById(){
+        when(receiptRepository.existsById(1L)).thenReturn(true);
         receiptService.deleteReceiptById(1L);
         verify(receiptRepository).deleteById(1L);
     }
+    @Test
+    void getAllReceiptsBetweenCustomDates_ShouldReturnListOfDtos(){
+        ReceiptEntity testReceipt = TestUtils.createTestReceipt();
+        LocalDate startDate = LocalDate.parse("2026-03-01", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate = LocalDate.parse("2026-03-31", DateTimeFormatter.ISO_LOCAL_DATE);
 
+        when(receiptRepository.findByDateBetween(startDate, endDate)).thenReturn(List.of(testReceipt));
+        List<ReceiptResponseDto> result = receiptService.getAllReceiptsForACustomPeriod("2026-03-01","2026-03-31");
+        assertEquals(1, result.size());
+        assertEquals(testReceipt.getVendor(), result.getFirst().getVendor());
+    }
 
 
 }
