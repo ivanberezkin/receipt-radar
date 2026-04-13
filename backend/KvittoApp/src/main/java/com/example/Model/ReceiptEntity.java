@@ -12,10 +12,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "receipt")
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class ReceiptEntity {
 
     @Id

@@ -1,5 +1,4 @@
 import type { Receipt } from "../../types/receipt";
-import { Timetabs } from "./Timetabs";
 import { SearchBar } from "./SearchBar";
 import { ReceiptList } from "./ReceiptList";
 import { ChartHomepage } from "./ChartHomepage";
@@ -12,7 +11,6 @@ interface HomePageProps {
 export const Homepage = ({ receipts, onRemove }: HomePageProps) => {
   return (
     <div>
-      <Timetabs />
       <SearchBar />
       <ChartHomepage />
       <ReceiptList receipts={receipts} onRemove={onRemove} />
